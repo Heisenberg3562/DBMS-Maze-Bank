@@ -30,7 +30,7 @@ public class Bank extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        signinBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         bank_name = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -41,18 +41,18 @@ public class Bank extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jButton2.setBackground(new java.awt.Color(174, 0, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Sign up");
-        jButton2.setToolTipText("");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        signinBtn.setBackground(new java.awt.Color(174, 0, 0));
+        signinBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        signinBtn.setForeground(new java.awt.Color(255, 255, 255));
+        signinBtn.setText("Sign up");
+        signinBtn.setToolTipText("");
+        signinBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                signinBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(470, 320, 180, 60);
+        jPanel1.add(signinBtn);
+        signinBtn.setBounds(470, 320, 180, 60);
 
         jButton1.setBackground(new java.awt.Color(174, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -143,11 +143,11 @@ public class Bank extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void signinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinBtnActionPerformed
         // TODO add your handling code here:
         new Signup().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_signinBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,9 +187,9 @@ public class Bank extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bank_name;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton signinBtn;
     // End of variables declaration//GEN-END:variables
 }
