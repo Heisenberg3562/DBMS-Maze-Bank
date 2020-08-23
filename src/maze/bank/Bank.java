@@ -31,7 +31,7 @@ public class Bank extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         signinBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
         bank_name = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -54,18 +54,18 @@ public class Bank extends javax.swing.JFrame {
         jPanel1.add(signinBtn);
         signinBtn.setBounds(470, 320, 180, 60);
 
-        jButton1.setBackground(new java.awt.Color(174, 0, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setBackground(new java.awt.Color(174, 0, 0));
+        loginBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setText("Login");
+        loginBtn.setToolTipText("");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(140, 320, 180, 60);
+        jPanel1.add(loginBtn);
+        loginBtn.setBounds(140, 320, 180, 60);
 
         bank_name.setFont(new java.awt.Font("Tahoma", 0, 60)); // NOI18N
         bank_name.setText("MAZE BANK");
@@ -119,6 +119,7 @@ public class Bank extends javax.swing.JFrame {
 			}
 		}
 		catch (SQLException exc) {
+                    System.out.println("");
 		}
 		finally {
 			if (myRs != null) {
@@ -135,13 +136,14 @@ public class Bank extends javax.swing.JFrame {
 		}
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
 
             // TODO add your handling code here:
 //        Bank b = new Bank();
 //        b.data();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new Login().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     private void signinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinBtnActionPerformed
         // TODO add your handling code here:
@@ -186,10 +188,10 @@ public class Bank extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bank_name;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginBtn;
     private javax.swing.JButton signinBtn;
     // End of variables declaration//GEN-END:variables
 }
