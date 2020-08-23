@@ -28,7 +28,9 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        balance = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
+        amtLabel = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -38,10 +40,18 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        balance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        balance.setText("0");
+        jPanel1.add(balance, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
+
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         desc.setForeground(new java.awt.Color(174, 0, 0));
         desc.setText("Invest in the red, it's in your interest");
         jPanel1.add(desc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+
+        amtLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        amtLabel.setText("Account Balance : ₹");
+        jPanel1.add(amtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
         bank_name.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         bank_name.setText("MAZE BANK");
@@ -104,7 +114,9 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel amtLabel;
     private javax.swing.JLabel background;
+    private javax.swing.JLabel balance;
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
     private javax.swing.JPanel jPanel1;
