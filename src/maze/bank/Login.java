@@ -5,6 +5,10 @@
  */
 package maze.bank;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Omkar
@@ -106,13 +110,20 @@ public class Login extends javax.swing.JFrame {
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
+        System.out.println(jTextField3.getText());
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        // TODO add your handling code here:
-        //        Bank b = new Bank();
-        //        b.data();
+//        try {
+//            // TODO add your handling code here:
+//            //        Bank b = new Bank();
+//            //        b.data();
+//            Database db = new Database();
+//            db.fetchData();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
