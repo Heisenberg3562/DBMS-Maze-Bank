@@ -27,14 +27,19 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         balance = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
         amtLabel = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        red = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,12 +59,23 @@ public class Dashboard extends javax.swing.JFrame {
         amtLabel.setText("Account Balance : ₹");
         jPanel1.add(amtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
+        name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setText("FName LName");
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 360, 20));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Choose a Service");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 130, 20));
+
+        red.setBackground(new java.awt.Color(174, 0, 0));
+        red.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Red.png"))); // NOI18N
+        jPanel1.add(red, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 580, 70));
+
         bank_name.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         bank_name.setText("MAZE BANK");
         jPanel1.add(bank_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 130, 40));
-
-        jLabel1.setBackground(new java.awt.Color(174, 0, 0));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 580, 70));
 
         main_header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Header1.PNG"))); // NOI18N
         jPanel1.add(main_header, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 600, 450));
@@ -124,7 +140,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel main_header;
+    private javax.swing.JLabel name;
+    private javax.swing.JLabel red;
     // End of variables declaration//GEN-END:variables
 }
