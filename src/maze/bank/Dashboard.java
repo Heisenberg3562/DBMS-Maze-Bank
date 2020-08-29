@@ -32,6 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
         desc = new javax.swing.JLabel();
         amtLabel = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
@@ -56,6 +57,9 @@ public class Dashboard extends javax.swing.JFrame {
         bank_name.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         bank_name.setText("MAZE BANK");
         jPanel1.add(bank_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 130, 40));
+
+        jLabel1.setBackground(new java.awt.Color(174, 0, 0));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 580, 70));
 
         main_header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Header1.PNG"))); // NOI18N
         jPanel1.add(main_header, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 600, 450));
@@ -119,6 +123,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel balance;
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel main_header;
     // End of variables declaration//GEN-END:variables
