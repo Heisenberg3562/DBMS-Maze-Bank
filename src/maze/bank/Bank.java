@@ -70,7 +70,7 @@ public class Bank extends javax.swing.JFrame {
         bank_name.setFont(new java.awt.Font("Tahoma", 0, 60)); // NOI18N
         bank_name.setText("MAZE BANK");
         jPanel1.add(bank_name);
-        bank_name.setBounds(230, 170, 330, 90);
+        bank_name.setBounds(240, 170, 320, 90);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Home.PNG"))); // NOI18N
         jPanel1.add(jLabel3);
