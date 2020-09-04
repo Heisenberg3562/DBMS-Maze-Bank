@@ -53,14 +53,14 @@ public class Transfer extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(174, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Back");
+        jButton1.setText("Main Menu");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 160, -1));
 
         amtLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         amtLabel.setText("Account Balance : ₹");
@@ -98,15 +98,7 @@ public class Transfer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        //        try {
-            //            // TODO add your handling code here:
-            //            //        Bank b = new Bank();
-            //            //        b.data();
-            //            Database db = new Database();
-            //            db.fetchData();
-            //        } catch (SQLException ex) {
-            //            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
+        //
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bank_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bank_nameMouseClicked
