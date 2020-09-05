@@ -115,15 +115,8 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-//        try {
-//            // TODO add your handling code here:
-//            //        Bank b = new Bank();
-//            //        b.data();
-//            Database db = new Database();
-//            db.fetchData();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        new Dashboard().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

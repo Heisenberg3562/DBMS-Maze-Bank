@@ -31,6 +31,15 @@ public class Transfer extends javax.swing.JFrame {
         balance = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        jButton2 = new javax.swing.JButton();
+        jPasswordField3 = new javax.swing.JPasswordField();
+        jPasswordField4 = new javax.swing.JPasswordField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         amtLabel = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
@@ -61,6 +70,51 @@ public class Transfer extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 160, -1));
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Transfer Account No.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("IFSC");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+
+        jPasswordField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
+
+        jButton2.setBackground(new java.awt.Color(174, 0, 0));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText(" Transfer");
+        jButton2.setToolTipText("");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
+
+        jPasswordField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 180, -1));
+
+        jPasswordField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(jPasswordField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 180, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Pin");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Amount : ₹");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
 
         amtLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         amtLabel.setText("Account Balance : ₹");
@@ -107,6 +161,24 @@ public class Transfer extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bank_nameMouseClicked
 
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(jTextField3.getText());
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        //        try {
+            //            // TODO add your handling code here:
+            //            //        Bank b = new Bank();
+            //            //        b.data();
+            //            Database db = new Database();
+            //            db.fetchData();
+            //        } catch (SQLException ex) {
+            //            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            //        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -149,7 +221,16 @@ public class Transfer extends javax.swing.JFrame {
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JPasswordField jPasswordField4;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel main_header;
     // End of variables declaration//GEN-END:variables
 }

@@ -239,9 +239,8 @@ public class Signup extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        // TODO add your handling code here:
-        //        Bank b = new Bank();
-        //        b.data();
+        new Dashboard().setVisible(true);
+        this.setVisible(false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

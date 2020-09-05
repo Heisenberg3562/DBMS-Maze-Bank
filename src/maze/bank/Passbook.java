@@ -30,6 +30,13 @@ public class Passbook extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         balance = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        red = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         amtLabel = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
@@ -49,6 +56,38 @@ public class Passbook extends javax.swing.JFrame {
         desc.setForeground(new java.awt.Color(174, 0, 0));
         desc.setText("Invest in the red, it's in your interest");
         jPanel1.add(desc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+
+        name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setText(Database.name);
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 360, 20));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("₹");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 220, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Account Balance :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 120, -1));
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 440, 150));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Account Transactions");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 160, 20));
+
+        red.setBackground(new java.awt.Color(174, 0, 0));
+        red.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Red.png"))); // NOI18N
+        jPanel1.add(red, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 580, 70));
 
         jButton1.setBackground(new java.awt.Color(174, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -93,6 +132,7 @@ public class Passbook extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -148,7 +188,14 @@ public class Passbook extends javax.swing.JFrame {
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel main_header;
+    private javax.swing.JLabel name;
+    private javax.swing.JLabel red;
     // End of variables declaration//GEN-END:variables
 }

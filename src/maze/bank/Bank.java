@@ -97,10 +97,6 @@ public class Bank extends javax.swing.JFrame {
 
     
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-
-            // TODO add your handling code here:
-//        Bank b = new Bank();
-//        b.data();
         new Login().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_loginBtnActionPerformed
