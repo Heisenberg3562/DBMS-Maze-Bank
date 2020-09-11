@@ -33,10 +33,10 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        pin = new javax.swing.JPasswordField();
         desc = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
@@ -51,13 +51,13 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Email");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        email.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Pin");
@@ -75,8 +75,8 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
 
-        jPasswordField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
+        pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         desc.setForeground(new java.awt.Color(174, 0, 0));
@@ -108,15 +108,23 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
-        System.out.println(jTextField3.getText());
-    }//GEN-LAST:event_jTextField3ActionPerformed
+        System.out.println(email.getText());
+    }//GEN-LAST:event_emailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        new Dashboard().setVisible(true);
-        this.setVisible(false);
+        
+        try {
+            Database db = new Database();
+            String pass = new String(pin.getPassword());
+            if(db.login(email.getText(), pass)){
+                new Dashboard().setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -158,12 +166,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
+    private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel main_header;
+    private javax.swing.JPasswordField pin;
     // End of variables declaration//GEN-END:variables
 }

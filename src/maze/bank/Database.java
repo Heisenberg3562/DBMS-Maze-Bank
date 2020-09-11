@@ -17,33 +17,80 @@ import java.sql.Statement;
  */
 public class Database {
     
-    static String name = "Fname Lname";
+    static String name = "";
+    static String balance = "";
+    static String account_no = "";
     
-    public void login() throws SQLException{
+    public Boolean login(String email, String pin) throws SQLException{
         Connection myConn = null;
         Statement myStmt = null;
         ResultSet myRs = null;
+        Boolean flag = false;
 
         try {
-            // 1. Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?serverTimezone=UTC", "student" , "student");
-
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
             myStmt = myConn.createStatement();
-
-            System.out.println("Inserting a new user to database\n");
-
-            myStmt.executeUpdate("insert into user(Acc_no, First_name, Last_name, Email, Phone, Address) values (9876543211, 'Adeeba', 'Ansari', 'adeeba@gmail.com', 8446904813, 'Bhiwandi')");
-            System.out.println("Test");
-            // 4. Verify this by getting a list of employees
-            myRs = myStmt.executeQuery("select * from user");
-            System.out.println("Test");
-            // 5. Process the result set
+            myRs = myStmt.executeQuery("SELECT * FROM `user`,account WHERE user.account_no=account.account_no AND email='"+email+"' AND pin='"+pin+"'");
             while (myRs.next()) {
-                    System.out.println(myRs.getString("First_name") + ", " + myRs.getString("Last_name"));
+                Database.name = myRs.getString("first_name")+" "+myRs.getString("last_name");
+                Database.balance = myRs.getString("balance");
+                Database.account_no = myRs.getString("account_no");
+            }
+            flag = true;
+        }
+        catch (SQLException exc) {
+            System.out.println("Exception");
+            exc.printStackTrace();
+        }
+        finally {
+            if (myRs != null) {
+                    myRs.close();
+            }
+
+            if (myStmt != null) {
+                    myStmt.close();
+            }
+
+            if (myConn != null) {
+                    myConn.close();
+            }
+        }
+        return flag;
+    }
+    
+    public void signup(String Fname, String Lname, String Email, String Phone, String Address, String Date, String PAN, String pin, String Branch) throws SQLException{
+
+        Connection myConn = null;
+        Statement myStmt = null;
+        Statement st = null;
+        Statement user = null;
+        ResultSet myRs = null;
+        ResultSet Rs = null;
+
+        try {
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
+            myStmt = myConn.createStatement();
+            st = myConn.createStatement();
+            user = myConn.createStatement();
+            System.out.println("Inserting a new user to database\n");
+            myStmt.executeUpdate("INSERT INTO `account` (`account_no`, `balance`, `type`, `branch_id`) VALUES (NULL, '0', 'savings', '"+Branch+"')");
+            myRs = myStmt.executeQuery("select * from account where account_no not in(select account_no from user)");
+            String acc = "";
+            while (myRs.next()) {
+                acc = myRs.getString("account_no");
+                Database.account_no = acc;
+            }
+            System.out.println(acc);
+            user.executeUpdate("INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `dob`, `pan`, `pin`, `account_no`) VALUES (NULL, '"+Fname+"', '"+Lname+"', '"+Email+"', '"+Phone+"', '"+Address+"', '"+Date+"', '"+PAN+"', '"+pin+"','"+acc+"' )");
+            Rs = st.executeQuery("SELECT * from user where account_no='"+acc+"'");
+            while (Rs.next()) {
+                Database.name = Rs.getString("first_name")+" "+Rs.getString("last_name");
+                Database.balance = Rs.getString("balance");
             }
         }
         catch (SQLException exc) {
-            System.out.println("Test");
+            System.out.println("Exception Occured");
+            exc.printStackTrace();
         }
         finally {
             if (myRs != null) {
@@ -60,31 +107,23 @@ public class Database {
         }
     }
     
-    public void data() throws SQLException{
+    public String findBranch(String bname) throws SQLException{
         Connection myConn = null;
         Statement myStmt = null;
         ResultSet myRs = null;
-
+        String no = "";
         try {
             // 1. Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?serverTimezone=UTC", "student" , "student");
-
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
             myStmt = myConn.createStatement();
-
-            System.out.println("Inserting a new user to database\n");
-
-            myStmt.executeUpdate("insert into user(Acc_no, First_name, Last_name, Email, Phone, Address) values (9876543211, 'Adeeba', 'Ansari', 'adeeba@gmail.com', 8446904813, 'Bhiwandi')");
-            System.out.println("Test");
-            // 4. Verify this by getting a list of employees
-            myRs = myStmt.executeQuery("select * from user");
-            System.out.println("Test");
-            // 5. Process the result set
+            String sql = "select * from branch where name='"+bname+"'";
+            myRs = myStmt.executeQuery(sql);
             while (myRs.next()) {
-                    System.out.println(myRs.getString("First_name") + ", " + myRs.getString("Last_name"));
+                no = myRs.getString("branch_id");
             }
         }
         catch (SQLException exc) {
-            System.out.println("Test");
+            System.out.println("Exception");
         }
         finally {
             if (myRs != null) {
@@ -99,6 +138,7 @@ public class Database {
                     myConn.close();
             }
         }
+        return no;
     }
     
     public void fetchData() throws SQLException{

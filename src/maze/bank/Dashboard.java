@@ -51,7 +51,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         balance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        balance.setText("0");
+        balance.setText(Database.balance);
         jPanel1.add(balance, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -65,8 +65,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         name.setForeground(new java.awt.Color(255, 255, 255));
-        name.setText("FName LName");
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 360, 20));
+        name.setText(Database.name);
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 560, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,28 +151,27 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        //        try {
-            //            // TODO add your handling code here:
-            //            //        Bank b = new Bank();
-            //            //        b.data();
-            //            Database db = new Database();
-            //            db.fetchData();
-            //        } catch (SQLException ex) {
-            //            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
+        
+        new Withdraw().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        new Transfer().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        new Passbook().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        new Deposit().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

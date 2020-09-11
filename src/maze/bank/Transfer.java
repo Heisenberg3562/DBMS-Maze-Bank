@@ -51,7 +51,7 @@ public class Transfer extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         balance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        balance.setText("0");
+        balance.setText(Database.balance);
         jPanel1.add(balance, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -152,7 +152,8 @@ public class Transfer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        //
+        new Dashboard().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bank_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bank_nameMouseClicked
@@ -168,15 +169,8 @@ public class Transfer extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        //        try {
-            //            // TODO add your handling code here:
-            //            //        Bank b = new Bank();
-            //            //        b.data();
-            //            Database db = new Database();
-            //            db.fetchData();
-            //        } catch (SQLException ex) {
-            //            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
+        new Passbook().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -102,9 +102,15 @@ public class Bank extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void signinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinBtnActionPerformed
-        // TODO add your handling code here:
-        new Signup().setVisible(true);
-        this.setVisible(false);
+        //try {
+            // TODO add your handling code here:
+            //Database db = new Database();
+            //db.setbranch();
+            new Signup().setVisible(true);
+            this.setVisible(false);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_signinBtnActionPerformed
 
     /**

@@ -5,17 +5,58 @@
  */
 package maze.bank;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
 /**
  *
  * @author Omkar
  */
 public class Signup extends javax.swing.JFrame {
+    
+    Connection myConn = null;
+    PreparedStatement pst = null;
+    ResultSet myRs = null;
 
     /**
      * Creates new form Signup
+     * @throws java.sql.SQLException
      */
-    public Signup() {
+    public Signup(){
         initComponents();
+        setbranch();
+    }
+    
+    private void setbranch(){
+        
+
+        try {
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
+            pst = myConn.prepareStatement("select * from branch");
+            myRs = pst.executeQuery();
+            while (myRs.next()) {
+                String item = myRs.getString("name");
+                branch.addItem(item);
+            }
+            if (myRs != null) {
+                    myRs.close();
+            }
+            if (myConn != null) {
+                    myConn.close();
+            }
+        }
+        catch (SQLException exc) {
+            System.out.println("Exception");
+        }
     }
 
     /**
@@ -29,26 +70,26 @@ public class Signup extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fname = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        addr = new javax.swing.JTextField();
+        dob = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        pan = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        branch = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        rpin = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        pin = new javax.swing.JPasswordField();
         desc = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
@@ -64,65 +105,65 @@ public class Signup extends javax.swing.JFrame {
         jLabel1.setText("First Name");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        fname.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                fnameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, -1));
+        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Last Name");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        lname.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                lnameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 180, -1));
+        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Email");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        email.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 180, -1));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 180, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Phone");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        phone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                phoneActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 180, -1));
+        jPanel1.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 180, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Address");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        addr.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        addr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                addrActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 180, -1));
+        jPanel1.add(addr, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 180, -1));
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy");
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 180, -1));
+        dob.setDateFormatString("dd/MM/yyyy");
+        dob.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 180, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("D.O.B");
@@ -132,33 +173,32 @@ public class Signup extends javax.swing.JFrame {
         jLabel7.setText("PAN Card");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        pan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                panActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 180, -1));
+        jPanel1.add(pan, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 180, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Branch");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thane", "Bhiwandi", "Nerul", "Taloja" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        branch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        branch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                branchActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 180, -1));
+        jPanel1.add(branch, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Pin (4 digits)");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 180, -1));
+        rpin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(rpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Retype Pin");
@@ -176,8 +216,8 @@ public class Signup extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, -1, -1));
 
-        jPasswordField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 180, -1));
+        pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 180, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         desc.setForeground(new java.awt.Color(174, 0, 0));
@@ -209,38 +249,52 @@ public class Signup extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_fnameActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_lnameActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_emailActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_phoneActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void addrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_addrActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void panActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_panActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void branchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_branchActionPerformed
 
+    
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        new Dashboard().setVisible(true);
-        this.setVisible(false);
+        
+        try {
+            Database db = new Database();
+            String pass = new String(pin.getPassword());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+            String strDate = dateFormat.format(dob.getDate());  
+            System.out.println(strDate);
+            String bid = db.findBranch(branch.getSelectedItem().toString());
+            db.signup(fname.getText(),lname.getText(),email.getText(),phone.getText(),addr.getText(),strDate,pan.getText(),pass,bid);
+            new Dashboard().setVisible(true);
+            this.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -280,12 +334,15 @@ public class Signup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addr;
     private javax.swing.JLabel background;
     private javax.swing.JLabel bank_name;
+    private javax.swing.JComboBox<String> branch;
     private javax.swing.JLabel desc;
+    private com.toedter.calendar.JDateChooser dob;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -297,14 +354,11 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lname;
     private javax.swing.JLabel main_header;
+    private javax.swing.JTextField pan;
+    private javax.swing.JTextField phone;
+    private javax.swing.JPasswordField pin;
+    private javax.swing.JPasswordField rpin;
     // End of variables declaration//GEN-END:variables
 }

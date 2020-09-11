@@ -49,7 +49,7 @@ public class Passbook extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         balance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        balance.setText("0");
+        balance.setText(Database.balance);
         jPanel1.add(balance, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -60,7 +60,7 @@ public class Passbook extends javax.swing.JFrame {
         name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         name.setForeground(new java.awt.Color(255, 255, 255));
         name.setText(Database.name);
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 360, 20));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 560, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -137,7 +137,8 @@ public class Passbook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        //
+        new Dashboard().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bank_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bank_nameMouseClicked
