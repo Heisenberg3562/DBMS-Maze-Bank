@@ -9,13 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 /**
  *
@@ -29,7 +27,6 @@ public class Signup extends javax.swing.JFrame {
 
     /**
      * Creates new form Signup
-     * @throws java.sql.SQLException
      */
     public Signup(){
         initComponents();
@@ -37,7 +34,6 @@ public class Signup extends javax.swing.JFrame {
     }
     
     private void setbranch(){
-        
 
         try {
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");

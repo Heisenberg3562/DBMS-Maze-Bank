@@ -5,6 +5,10 @@
  */
 package maze.bank;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Omkar
@@ -32,8 +36,8 @@ public class Deposit extends javax.swing.JFrame {
         desc = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        bal = new javax.swing.JTextField();
+        pin = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         amtLabel = new javax.swing.JLabel();
@@ -71,16 +75,16 @@ public class Deposit extends javax.swing.JFrame {
         jLabel3.setText("Deposit Amount : ₹");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        bal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                balActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
+        jPanel1.add(bal, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
 
-        jPasswordField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
+        pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Pin");
@@ -144,24 +148,25 @@ public class Deposit extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bank_nameMouseClicked
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void balActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balActionPerformed
         // TODO add your handling code here:
-        System.out.println(jTextField3.getText());
-    }//GEN-LAST:event_jTextField3ActionPerformed
+        System.out.println(bal.getText());
+    }//GEN-LAST:event_balActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        //        try {
-            //            // TODO add your handling code here:
-            //            //        Bank b = new Bank();
-            //            //        b.data();
-            //            Database db = new Database();
-            //            db.fetchData();
-            //        } catch (SQLException ex) {
-            //            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
-        new Passbook().setVisible(true);
-        this.setVisible(false);
+        try {
+            Boolean check = false;
+            Database db = new Database();
+            String spin = new String(pin.getPassword());
+            check = db.deposit(bal.getText(), spin);
+            if(check){
+                new Passbook().setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Deposit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -202,6 +207,7 @@ public class Deposit extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel amtLabel;
     private javax.swing.JLabel background;
+    private javax.swing.JTextField bal;
     private javax.swing.JLabel balance;
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
@@ -210,8 +216,7 @@ public class Deposit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel main_header;
+    private javax.swing.JPasswordField pin;
     // End of variables declaration//GEN-END:variables
 }

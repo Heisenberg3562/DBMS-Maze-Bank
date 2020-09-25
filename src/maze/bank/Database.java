@@ -20,6 +20,7 @@ public class Database {
     static String name = "";
     static String balance = "";
     static String account_no = "";
+    static String user_id = "";
     
     public Boolean login(String email, String pin) throws SQLException{
         Connection myConn = null;
@@ -35,8 +36,13 @@ public class Database {
                 Database.name = myRs.getString("first_name")+" "+myRs.getString("last_name");
                 Database.balance = myRs.getString("balance");
                 Database.account_no = myRs.getString("account_no");
+                Database.user_id = myRs.getString("user_id");
             }
-            flag = true;
+            if(Database.name.equals("")){
+                flag = false;
+            }else{
+                flag = true;
+            }
         }
         catch (SQLException exc) {
             System.out.println("Exception");
@@ -79,13 +85,14 @@ public class Database {
             while (myRs.next()) {
                 acc = myRs.getString("account_no");
                 Database.account_no = acc;
+                Database.balance = myRs.getString("balance");
             }
             System.out.println(acc);
             user.executeUpdate("INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `dob`, `pan`, `pin`, `account_no`) VALUES (NULL, '"+Fname+"', '"+Lname+"', '"+Email+"', '"+Phone+"', '"+Address+"', '"+Date+"', '"+PAN+"', '"+pin+"','"+acc+"' )");
             Rs = st.executeQuery("SELECT * from user where account_no='"+acc+"'");
             while (Rs.next()) {
                 Database.name = Rs.getString("first_name")+" "+Rs.getString("last_name");
-                Database.balance = Rs.getString("balance");
+                
             }
         }
         catch (SQLException exc) {
@@ -141,6 +148,50 @@ public class Database {
         return no;
     }
     
+    public Boolean deposit(String balance, String pin) throws SQLException{
+        //String email, String pin
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
+        Boolean flag = false;
+        String id = "";
+
+        try {
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("SELECT * FROM `user` WHERE `pin`="+pin+" AND `user_id`="+Database.user_id+"");
+            while (myRs.next()) {
+                id = myRs.getString("user_id");
+            }
+            if(id == ""){
+                flag = false;
+            }else{
+                myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+Database.user_id+"', '"+Database.account_no+"', 'Deposit', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"')");
+                myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"' WHERE `account`.`account_no` = "+Database.account_no+"");
+                Database.balance = Integer.toString(Integer.parseInt(balance)+Integer.parseInt(Database.balance));
+                flag = true;
+            }
+        }
+        catch (SQLException exc) {
+            System.out.println("Exception");
+            exc.printStackTrace();
+        }
+        finally {
+            if (myRs != null) {
+                    myRs.close();
+            }
+
+            if (myStmt != null) {
+                    myStmt.close();
+            }
+
+            if (myConn != null) {
+                    myConn.close();
+            }
+        }
+        return flag;
+    }
+    
     public void fetchData() throws SQLException{
         Connection myConn = null;
         Statement myStmt = null;
@@ -148,7 +199,7 @@ public class Database {
 
         try {
             // 1. Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank?serverTimezone=UTC", "student" , "student");
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
 
             myStmt = myConn.createStatement();
 
