@@ -192,6 +192,102 @@ public class Database {
         return flag;
     }
     
+    public Boolean withdraw(String balance, String pin) throws SQLException{
+        //String email, String pin
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
+        Boolean flag = false;
+        String id = "";
+
+        try {
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("SELECT * FROM `user` WHERE `pin`="+pin+" AND `user_id`="+Database.user_id+"");
+            while (myRs.next()) {
+                id = myRs.getString("user_id");
+            }
+            if(id == ""){
+                flag = false;
+            }else{
+                myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+Database.user_id+"', '"+Database.account_no+"', 'Withdraw', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(-Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"')");
+                myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(-Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"' WHERE `account`.`account_no` = "+Database.account_no+"");
+                Database.balance = Integer.toString(-Integer.parseInt(balance)+Integer.parseInt(Database.balance));
+                flag = true;
+            }
+        }
+        catch (SQLException exc) {
+            System.out.println("Exception");
+            exc.printStackTrace();
+        }
+        finally {
+            if (myRs != null) {
+                    myRs.close();
+            }
+
+            if (myStmt != null) {
+                    myStmt.close();
+            }
+
+            if (myConn != null) {
+                    myConn.close();
+            }
+        }
+        return flag;
+    }
+    
+    public Boolean transfer(String account_no,String balance, String pin) throws SQLException{
+        //String email, String pin
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
+        Boolean flag = false;
+        String id = "";
+        String tid = "";
+        String bal = "";
+
+        try {
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("SELECT * FROM `user` WHERE `pin`="+pin+" AND `user_id`="+Database.user_id+"");
+            while (myRs.next()) {
+                id = myRs.getString("user_id");
+            }
+            if("".equals(id)){
+                flag = false;
+            }else{
+                myRs = myStmt.executeQuery("SELECT * FROM `account`,`user` WHERE account.account_no = user.account_no AND account.account_no = "+account_no+"");
+                while (myRs.next()){
+                    tid = myRs.getString("user_id");
+                    bal = myRs.getString("balance");
+                }
+                Database db = new Database();
+                myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+tid+"', '"+account_no+"', 'Deposit', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(bal))+"')");
+                myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(bal))+"' WHERE `account`.`account_no` = "+account_no+"");
+                flag = db.withdraw(balance, pin);
+                flag = true;
+            }
+        }
+        catch (SQLException exc) {
+            System.out.println("Exception");
+            exc.printStackTrace();
+        }
+        finally {
+            if (myRs != null) {
+                    myRs.close();
+            }
+
+            if (myStmt != null) {
+                    myStmt.close();
+            }
+
+            if (myConn != null) {
+                    myConn.close();
+            }
+        }
+        return flag;
+    }
+    
     public void fetchData() throws SQLException{
         Connection myConn = null;
         Statement myStmt = null;

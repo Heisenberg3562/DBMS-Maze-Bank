@@ -5,17 +5,61 @@
  */
 package maze.bank;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Omkar
  */
 public class Passbook extends javax.swing.JFrame {
+    
+    Connection myConn = null;
+    PreparedStatement pst = null;
+    ResultSet myRs = null;
 
     /**
      * Creates new form Passbook
      */
     public Passbook() {
         initComponents();
+        setpassbook();
+    }
+    
+    private void setpassbook(){
+
+        try {
+            DefaultListModel dlm = new DefaultListModel();
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
+            pst = myConn.prepareStatement("select * from transaction where account_no = "+Database.account_no+"");
+            myRs = pst.executeQuery();
+            while (myRs.next()) {
+                String type = myRs.getString("type");
+                String id = myRs.getString("tr_id");
+                String time = myRs.getString("created_at");
+                String amount = myRs.getString("amount");
+                String bal = myRs.getString("current_balance");
+                //String l = String.format("%s         %10s         5s",id,type,time);
+                type = ("Deposit".equals(type)) ? type+"   " : type;
+                //System.out.print(type);
+                String l = String.format("%5s", id) + "         " + type + "         " + time +String.format("         %10s         %10s", amount,bal);
+                dlm.addElement(l);
+            }
+            jList1.setModel(dlm);
+            if (myRs != null) {
+                    myRs.close();
+            }
+            if (myConn != null) {
+                    myConn.close();
+            }
+        }
+        catch (SQLException exc) {
+            System.out.println("Exception");
+        }
     }
 
     /**
@@ -39,6 +83,7 @@ public class Passbook extends javax.swing.JFrame {
         red = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         amtLabel = new javax.swing.JLabel();
+        amtLabel1 = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
         main_header = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -65,17 +110,12 @@ public class Passbook extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("₹ "+Database.balance);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 220, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 190, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Account Balance :");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 120, -1));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 440, 150));
@@ -102,8 +142,12 @@ public class Passbook extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 160, -1));
 
         amtLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        amtLabel.setText("Account Balance : ₹");
-        jPanel1.add(amtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
+        amtLabel.setText("  Tr_id   Type              Created at           Amount    Current Bal");
+        jPanel1.add(amtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 440, -1));
+
+        amtLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        amtLabel1.setText("Account Balance : ₹");
+        jPanel1.add(amtLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
         bank_name.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         bank_name.setText("MAZE BANK");
@@ -184,6 +228,7 @@ public class Passbook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel amtLabel;
+    private javax.swing.JLabel amtLabel1;
     private javax.swing.JLabel background;
     private javax.swing.JLabel balance;
     private javax.swing.JLabel bank_name;

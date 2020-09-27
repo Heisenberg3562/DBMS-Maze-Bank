@@ -5,6 +5,10 @@
  */
 package maze.bank;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Omkar
@@ -31,11 +35,11 @@ public class Transfer extends javax.swing.JFrame {
         balance = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        bal = new javax.swing.JTextField();
+        accno = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jPasswordField4 = new javax.swing.JPasswordField();
+        pin = new javax.swing.JPasswordField();
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         amtLabel = new javax.swing.JLabel();
@@ -69,13 +73,21 @@ public class Transfer extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 160, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        bal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                balActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
+        jPanel1.add(bal, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
+
+        accno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        accno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accnoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(accno, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Transfer Account No.");
@@ -93,11 +105,8 @@ public class Transfer extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
-        jPasswordField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
-
-        jPasswordField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(jPasswordField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 180, -1));
+        pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Pin");
@@ -153,16 +162,30 @@ public class Transfer extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bank_nameMouseClicked
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void balActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balActionPerformed
         // TODO add your handling code here:
-        System.out.println(jTextField3.getText());
-    }//GEN-LAST:event_jTextField3ActionPerformed
+        System.out.println(bal.getText());
+    }//GEN-LAST:event_balActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        new Passbook().setVisible(true);
-        this.setVisible(false);
+        
+        try {
+            Boolean check = false;
+            Database db = new Database();
+            String spin = new String(pin.getPassword());
+            check = db.transfer(accno.getText(), bal.getText(), spin);
+            if(check){
+                new Passbook().setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Deposit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void accnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,8 +223,10 @@ public class Transfer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField accno;
     private javax.swing.JLabel amtLabel;
     private javax.swing.JLabel background;
+    private javax.swing.JTextField bal;
     private javax.swing.JLabel balance;
     private javax.swing.JLabel bank_name;
     private javax.swing.JLabel desc;
@@ -211,9 +236,7 @@ public class Transfer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JPasswordField jPasswordField4;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel main_header;
+    private javax.swing.JPasswordField pin;
     // End of variables declaration//GEN-END:variables
 }
