@@ -43,9 +43,7 @@ public class Passbook extends javax.swing.JFrame {
                 String time = myRs.getString("created_at");
                 String amount = myRs.getString("amount");
                 String bal = myRs.getString("current_balance");
-                //String l = String.format("%s         %10s         5s",id,type,time);
                 type = ("Deposit".equals(type)) ? type+"   " : type;
-                //System.out.print(type);
                 String l = String.format("%5s", id) + "         " + type + "         " + time +String.format("         %10s         %10s", amount,bal);
                 dlm.addElement(l);
             }

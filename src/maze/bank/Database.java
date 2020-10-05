@@ -92,7 +92,7 @@ public class Database {
             Rs = st.executeQuery("SELECT * from user where account_no='"+acc+"'");
             while (Rs.next()) {
                 Database.name = Rs.getString("first_name")+" "+Rs.getString("last_name");
-                
+                Database.user_id = Rs.getString("user_id");
             }
         }
         catch (SQLException exc) {

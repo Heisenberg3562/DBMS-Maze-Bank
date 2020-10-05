@@ -5,9 +5,11 @@
  */
 package maze.bank;
 
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,6 +37,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         pin = new javax.swing.JPasswordField();
         desc = new javax.swing.JLabel();
@@ -57,11 +60,28 @@ public class Login extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailKeyPressed(evt);
+            }
+        });
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Pin");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, -1, -1));
+
+        jButton2.setBackground(new java.awt.Color(174, 0, 0));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Back");
+        jButton2.setToolTipText("");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, -1));
 
         jButton1.setBackground(new java.awt.Color(174, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -76,6 +96,11 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
 
         pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pinKeyPressed(evt);
+            }
+        });
         jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -117,15 +142,49 @@ public class Login extends javax.swing.JFrame {
         
         try {
             Database db = new Database();
-            String pass = new String(pin.getPassword());
-            if(db.login(email.getText(), pass)){
-                new Dashboard().setVisible(true);
-                this.setVisible(false);
+            //sendSMS sms = new sendSMS();
+            //String msg = sms.sendSms();
+            validate v = new validate();
+            Boolean checkEmail = v.emailValid(email.getText());
+            if(!checkEmail){
+                JOptionPane.showMessageDialog(this,"Invalid Email");
+            }else{
+                String pass = new String(pin.getPassword());
+                if(db.login(email.getText(), pass)){
+                    new Dashboard().setVisible(true);
+                    this.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(this,"Invalid Email or Pin");
+                }
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyPressed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_emailKeyPressed
+
+    private void pinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pinKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
+            pin.setEditable(true);
+        }else{
+            pin.setEditable(false);
+        }
+    }//GEN-LAST:event_pinKeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Bank().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +227,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel desc;
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

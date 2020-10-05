@@ -79,12 +79,22 @@ public class Transfer extends javax.swing.JFrame {
                 balActionPerformed(evt);
             }
         });
+        bal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                balKeyPressed(evt);
+            }
+        });
         jPanel1.add(bal, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
 
         accno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         accno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accnoActionPerformed(evt);
+            }
+        });
+        accno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                accnoKeyPressed(evt);
             }
         });
         jPanel1.add(accno, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
@@ -106,6 +116,11 @@ public class Transfer extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
         pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pinKeyPressed(evt);
+            }
+        });
         jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -186,6 +201,36 @@ public class Transfer extends javax.swing.JFrame {
     private void accnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_accnoActionPerformed
+
+    private void pinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pinKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
+            pin.setEditable(true);
+        }else{
+            pin.setEditable(false);
+        }
+    }//GEN-LAST:event_pinKeyPressed
+
+    private void balKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_balKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && bal.getText().length()<10){
+            bal.setEditable(true);
+        }else{
+            bal.setEditable(false);
+        }
+    }//GEN-LAST:event_balKeyPressed
+
+    private void accnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accnoKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && accno.getText().length()<10){
+            accno.setEditable(true);
+        }else{
+            accno.setEditable(false);
+        }
+    }//GEN-LAST:event_accnoKeyPressed
 
     /**
      * @param args the command line arguments

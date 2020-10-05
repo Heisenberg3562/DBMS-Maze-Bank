@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,6 +83,7 @@ public class Signup extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         branch = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         rpin = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -107,6 +109,11 @@ public class Signup extends javax.swing.JFrame {
                 fnameActionPerformed(evt);
             }
         });
+        fname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fnameKeyPressed(evt);
+            }
+        });
         jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 180, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -117,6 +124,11 @@ public class Signup extends javax.swing.JFrame {
         lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lnameActionPerformed(evt);
+            }
+        });
+        lname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lnameKeyPressed(evt);
             }
         });
         jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 180, -1));
@@ -141,6 +153,11 @@ public class Signup extends javax.swing.JFrame {
         phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneActionPerformed(evt);
+            }
+        });
+        phone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                phoneKeyPressed(evt);
             }
         });
         jPanel1.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 180, -1));
@@ -175,6 +192,11 @@ public class Signup extends javax.swing.JFrame {
                 panActionPerformed(evt);
             }
         });
+        pan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                panKeyPressed(evt);
+            }
+        });
         jPanel1.add(pan, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 180, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -193,7 +215,24 @@ public class Signup extends javax.swing.JFrame {
         jLabel9.setText("Pin (4 digits)");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(174, 0, 0));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Back");
+        jButton2.setToolTipText("");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 80, -1));
+
         rpin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rpin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                rpinKeyPressed(evt);
+            }
+        });
         jPanel1.add(rpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -213,6 +252,11 @@ public class Signup extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, -1, -1));
 
         pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pinKeyPressed(evt);
+            }
+        });
         jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 180, -1));
 
         desc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -280,19 +324,93 @@ public class Signup extends javax.swing.JFrame {
         
         try {
             Database db = new Database();
-            String pass = new String(pin.getPassword());
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-            String strDate = dateFormat.format(dob.getDate());  
-            System.out.println(strDate);
-            String bid = db.findBranch(branch.getSelectedItem().toString());
-            db.signup(fname.getText(),lname.getText(),email.getText(),phone.getText(),addr.getText(),strDate,pan.getText(),pass,bid);
-            new Dashboard().setVisible(true);
-            this.setVisible(false);
+            validate v = new validate();
+            
+            Boolean checkEmail = v.emailValid(email.getText());
+            Boolean checkPan = v.pancard(pan.getText());
+            if(fname.getText().equals("") && lname.getText().equals("") && email.getText().equals("") && phone.getText().equals("") && addr.getText().equals("") && pan.getText().equals("") && pin.getPassword().equals("") && rpin.getPassword().equals("")){
+                JOptionPane.showMessageDialog(this,"Please Fill all the Fields");
+            }else if(!checkEmail){
+                JOptionPane.showMessageDialog(this,"Invalid Email");
+            }else if(!checkPan){
+                JOptionPane.showMessageDialog(this,"Invalid PAN Number");
+            }else if(pin.getPassword() != rpin.getPassword()){
+                JOptionPane.showMessageDialog(this,"PIN do not Match");
+            }else{
+                String pass = new String(pin.getPassword());
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+                String strDate = dateFormat.format(dob.getDate());  
+                System.out.println(strDate);
+                String bid = db.findBranch(branch.getSelectedItem().toString());
+                db.signup(fname.getText(),lname.getText(),email.getText(),phone.getText(),addr.getText(),strDate,pan.getText(),pass,bid);
+                new Dashboard().setVisible(true);
+                this.setVisible(false);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pinKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
+            pin.setEditable(true);
+        }else{
+            pin.setEditable(false);
+        }
+    }//GEN-LAST:event_pinKeyPressed
+
+    private void rpinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rpinKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && rpin.getPassword().length<4){
+            rpin.setEditable(true);
+        }else{
+            rpin.setEditable(false);
+        }
+    }//GEN-LAST:event_rpinKeyPressed
+
+    private void fnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fnameKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isLetter(ch) || Character.isISOControl(ch)) || Character.isWhitespace(ch)){
+            fname.setEditable(true);
+        }else{
+            fname.setEditable(false);
+        }
+    }//GEN-LAST:event_fnameKeyPressed
+
+    private void lnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lnameKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isLetter(ch) || Character.isISOControl(ch)) || Character.isWhitespace(ch)){
+            lname.setEditable(true);
+        }else{
+            lname.setEditable(false);
+        }
+    }//GEN-LAST:event_lnameKeyPressed
+
+    private void phoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyPressed
+        // TODO add your handling code here:
+        char ch = evt.getKeyChar();
+        if((Character.isDigit(ch) || Character.isISOControl(ch)) && phone.getText().length()<10){
+            phone.setEditable(true);
+        }else{
+            phone.setEditable(false);
+        }
+    }//GEN-LAST:event_phoneKeyPressed
+
+    private void panKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panKeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Bank().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +457,7 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
