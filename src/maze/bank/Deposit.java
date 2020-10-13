@@ -37,11 +37,11 @@ public class Deposit extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         bal = new javax.swing.JTextField();
-        pin = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         amtLabel = new javax.swing.JLabel();
         bank_name = new javax.swing.JLabel();
+        pin = new javax.swing.JPasswordField();
         main_header = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
@@ -88,14 +88,6 @@ public class Deposit extends javax.swing.JFrame {
         });
         jPanel1.add(bal, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 180, -1));
 
-        pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        pin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                pinKeyPressed(evt);
-            }
-        });
-        jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
-
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Pin");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, -1));
@@ -110,7 +102,7 @@ public class Deposit extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
 
         amtLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         amtLabel.setText("Account Balance : ₹");
@@ -124,6 +116,14 @@ public class Deposit extends javax.swing.JFrame {
             }
         });
         jPanel1.add(bank_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 130, 40));
+
+        pin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pinKeyPressed(evt);
+            }
+        });
+        jPanel1.add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 180, -1));
 
         main_header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Header1.PNG"))); // NOI18N
         jPanel1.add(main_header, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 600, 450));
