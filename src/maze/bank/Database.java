@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,7 +121,6 @@ public class Database {
         ResultSet myRs = null;
         String no = "";
         try {
-            // 1. Get a connection to database
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
             myStmt = myConn.createStatement();
             String sql = "select * from branch where name='"+bname+"'";
@@ -163,8 +163,9 @@ public class Database {
             while (myRs.next()) {
                 id = myRs.getString("user_id");
             }
-            if(id == ""){
+            if("".equals(id)){
                 flag = false;
+                JOptionPane.showMessageDialog(null,"Invalid Pin");
             }else{
                 myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+Database.user_id+"', '"+Database.account_no+"', 'Deposit', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"')");
                 myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"' WHERE `account`.`account_no` = "+Database.account_no+"");
@@ -207,8 +208,9 @@ public class Database {
             while (myRs.next()) {
                 id = myRs.getString("user_id");
             }
-            if(id == ""){
+            if("".equals(id)){
                 flag = false;
+                JOptionPane.showMessageDialog(null,"Invalid Pin");
             }else{
                 myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+Database.user_id+"', '"+Database.account_no+"', 'Withdraw', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(-Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"')");
                 myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(-Integer.parseInt(balance)+Integer.parseInt(Database.balance))+"' WHERE `account`.`account_no` = "+Database.account_no+"");
@@ -255,17 +257,23 @@ public class Database {
             }
             if("".equals(id)){
                 flag = false;
+                JOptionPane.showMessageDialog(null,"Invalid Pin");
             }else{
                 myRs = myStmt.executeQuery("SELECT * FROM `account`,`user` WHERE account.account_no = user.account_no AND account.account_no = "+account_no+"");
                 while (myRs.next()){
                     tid = myRs.getString("user_id");
                     bal = myRs.getString("balance");
                 }
-                Database db = new Database();
-                myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+tid+"', '"+account_no+"', 'Deposit', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(bal))+"')");
-                myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(bal))+"' WHERE `account`.`account_no` = "+account_no+"");
-                flag = db.withdraw(balance, pin);
-                flag = true;
+                if("".equals(tid)){
+                    flag = false;
+                    JOptionPane.showMessageDialog(null,"Account Number does not exist");
+                }else{
+                    Database db = new Database();
+                    myStmt.executeUpdate("INSERT INTO `transaction` (`tr_id`, `user_id`, `account_no`, `type`, `created_at`, `transfer_acc_no`, `amount`, `current_balance`) VALUES (NULL, '"+tid+"', '"+account_no+"', 'Deposit', current_timestamp(), NULL, '"+balance+"', '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(bal))+"')");
+                    myStmt.executeUpdate("UPDATE `account` SET `balance` = '"+Integer.toString(Integer.parseInt(balance)+Integer.parseInt(bal))+"' WHERE `account`.`account_no` = "+account_no+"");
+                    flag = db.withdraw(balance, pin);
+                    flag = true;
+                }
             }
         }
         catch (SQLException exc) {
@@ -286,43 +294,6 @@ public class Database {
             }
         }
         return flag;
-    }
-    
-    public void fetchData() throws SQLException{
-        Connection myConn = null;
-        Statement myStmt = null;
-        ResultSet myRs = null;
-
-        try {
-            // 1. Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mazebank?serverTimezone=UTC", "admin" , "admin");
-
-            myStmt = myConn.createStatement();
-
-            // 3. Execute SQL query
-            myRs = myStmt.executeQuery("select * from user");
-
-            // 4. Process the result set
-            while (myRs.next()) {
-                    System.out.println(myRs.getString("Last_name") + ", " + myRs.getString("First_name"));
-            }
-        }
-        catch (SQLException exc) {
-            System.out.println("Test");
-        }
-        finally {
-            if (myRs != null) {
-                    myRs.close();
-            }
-
-            if (myStmt != null) {
-                    myStmt.close();
-            }
-
-            if (myConn != null) {
-                    myConn.close();
-            }
-        }
     }
     
 }

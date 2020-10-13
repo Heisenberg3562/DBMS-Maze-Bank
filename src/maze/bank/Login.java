@@ -175,6 +175,8 @@ public class Login extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
             pin.setEditable(true);
+        }else if(Character.isISOControl(ch)){
+            pin.setEditable(true);
         }else{
             pin.setEditable(false);
         }

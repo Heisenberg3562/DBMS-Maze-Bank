@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package maze.bank;
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Omkar
@@ -102,15 +99,9 @@ public class Bank extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void signinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signinBtnActionPerformed
-        //try {
-            // TODO add your handling code here:
-            //Database db = new Database();
-            //db.setbranch();
-            new Signup().setVisible(true);
-            this.setVisible(false);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        
+        new Signup().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_signinBtnActionPerformed
 
     /**

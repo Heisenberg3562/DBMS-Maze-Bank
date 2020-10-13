@@ -357,6 +357,8 @@ public class Signup extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
             pin.setEditable(true);
+        }else if(Character.isISOControl(ch)){
+            pin.setEditable(true);
         }else{
             pin.setEditable(false);
         }
@@ -367,6 +369,8 @@ public class Signup extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && rpin.getPassword().length<4){
             rpin.setEditable(true);
+        }else if(Character.isISOControl(ch)){
+            pin.setEditable(true);
         }else{
             rpin.setEditable(false);
         }
@@ -375,7 +379,7 @@ public class Signup extends javax.swing.JFrame {
     private void fnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fnameKeyPressed
         // TODO add your handling code here:
         char ch = evt.getKeyChar();
-        if((Character.isLetter(ch) || Character.isISOControl(ch)) || Character.isWhitespace(ch)){
+        if((Character.isLetter(ch) || Character.isISOControl(ch)) || Character.isWhitespace(ch) || Character.isSpaceChar(ch)){
             fname.setEditable(true);
         }else{
             fname.setEditable(false);
@@ -385,7 +389,7 @@ public class Signup extends javax.swing.JFrame {
     private void lnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lnameKeyPressed
         // TODO add your handling code here:
         char ch = evt.getKeyChar();
-        if((Character.isLetter(ch) || Character.isISOControl(ch)) || Character.isWhitespace(ch)){
+        if((Character.isLetter(ch) || Character.isISOControl(ch)) || Character.isWhitespace(ch) || Character.isSpaceChar(ch)){
             lname.setEditable(true);
         }else{
             lname.setEditable(false);
@@ -397,6 +401,8 @@ public class Signup extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && phone.getText().length()<10){
             phone.setEditable(true);
+        }else if(Character.isISOControl(ch)){
+            pin.setEditable(true);
         }else{
             phone.setEditable(false);
         }

@@ -193,6 +193,8 @@ public class Withdraw extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
             pin.setEditable(true);
+        }else if(Character.isISOControl(ch)){
+            pin.setEditable(true);
         }else{
             pin.setEditable(false);
         }
@@ -203,6 +205,8 @@ public class Withdraw extends javax.swing.JFrame {
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && bal.getText().length()<10){
             bal.setEditable(true);
+        }else if(Character.isISOControl(ch)){
+            pin.setEditable(true);
         }else{
             bal.setEditable(false);
         }

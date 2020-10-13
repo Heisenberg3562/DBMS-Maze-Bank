@@ -8,6 +8,7 @@ package maze.bank;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -188,10 +189,14 @@ public class Transfer extends javax.swing.JFrame {
             Boolean check = false;
             Database db = new Database();
             String spin = new String(pin.getPassword());
-            check = db.transfer(accno.getText(), bal.getText(), spin);
-            if(check){
-                new Passbook().setVisible(true);
-                this.setVisible(false);
+            if(Integer.parseInt(bal.getText()) > Integer.parseInt(Database.balance)){
+                JOptionPane.showMessageDialog(this,"Insufficient Balance");
+            }else{
+                check = db.transfer(accno.getText(), bal.getText(), spin);
+                if(check){
+                    new Passbook().setVisible(true);
+                    this.setVisible(false);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Deposit.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,6 +211,8 @@ public class Transfer extends javax.swing.JFrame {
         // TODO add your handling code here:
         char ch = evt.getKeyChar();
         if((Character.isDigit(ch) || Character.isISOControl(ch)) && pin.getPassword().length<4){
+            pin.setEditable(true);
+        }else if(Character.isISOControl(ch)){
             pin.setEditable(true);
         }else{
             pin.setEditable(false);
