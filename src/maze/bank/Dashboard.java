@@ -32,6 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
         balance = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
         amtLabel = new javax.swing.JLabel();
+        name1 = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         red = new javax.swing.JLabel();
@@ -65,10 +66,15 @@ public class Dashboard extends javax.swing.JFrame {
         amtLabel.setText("Account Balance : ₹");
         jPanel1.add(amtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
+        name1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        name1.setForeground(new java.awt.Color(255, 255, 255));
+        name1.setText(Database.account_no);
+        jPanel1.add(name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 140, 20));
+
         name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         name.setForeground(new java.awt.Color(255, 255, 255));
         name.setText(Database.name);
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 560, 20));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 280, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,6 +260,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel main_header;
     private javax.swing.JLabel name;
+    private javax.swing.JLabel name1;
     private javax.swing.JLabel red;
     // End of variables declaration//GEN-END:variables
 }
