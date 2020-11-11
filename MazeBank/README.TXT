@@ -13,6 +13,8 @@ type the following:
 
 java -jar "Maze_Bank.jar" 
 
+or execute the .exe file named "mazebank.exe"
+
 To distribute this project, zip up the dist folder (including the lib folder)
 and distribute the ZIP file.
 
