@@ -7,7 +7,7 @@ package maze.bank;
 
 /**
  *
- * @author Omkar
+ * @author mazebank
  */
 public class validate {
 
@@ -35,7 +35,6 @@ public class validate {
 			return false;
 		}
    }
-
 
 
 //pancard
