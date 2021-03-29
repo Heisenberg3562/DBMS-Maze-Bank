@@ -328,17 +328,19 @@ public class Signup extends javax.swing.JFrame {
             
             Boolean checkEmail = v.emailValid(email.getText());
             Boolean checkPan = v.pancard(pan.getText());
+            String pin1 = new String(pin.getPassword());
+            String pin2 = new String(rpin.getPassword());
             if(fname.getText().equals("") && lname.getText().equals("") && email.getText().equals("") && phone.getText().equals("") && addr.getText().equals("") && pan.getText().equals("") && pin.getPassword().equals("") && rpin.getPassword().equals("")){
                 JOptionPane.showMessageDialog(this,"Please Fill all the Fields");
             }else if(!checkEmail){
                 JOptionPane.showMessageDialog(this,"Invalid Email");
             }else if(!checkPan){
                 JOptionPane.showMessageDialog(this,"Invalid PAN Number");
-            }else if(pin.getPassword() != rpin.getPassword()){
+            }else if(!pin1.equals(pin2)){
                 JOptionPane.showMessageDialog(this,"PIN do not Match");
             }else{
                 String pass = new String(pin.getPassword());
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String strDate = dateFormat.format(dob.getDate());  
                 System.out.println(strDate);
                 String bid = db.findBranch(branch.getSelectedItem().toString());
